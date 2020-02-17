@@ -15,17 +15,27 @@ Functions:
 
 
 import pandas as pd
-from pandas import ExcelWriter
-from pandas import ExcelFile
 
-fileLocation = r'W:\Documents\Code\excelOrganizer\excelOrganizer\Block data.xlsx'
+#some guide I was reading said to insert the below code, but I have yet to use it. I may get rid of it.
+# from pandas import ExcelWriter
+# from pandas import ExcelFile
+
 
 class excelOrganizer(object):
     
-    def copyColumn(fileLocation,columnLabel): #todo: possibly add in way to select specific rows
+    #this below code is if I want to make the file location an attribute of the class.
+    # def __init__(self, file1, file2):
+    #     self.file1 = file1
+    #     self.file2 = file2
+    
+    #this method reads and excel file at a location and converts a column into a dataframe.
+    def copyColumn(self, fileLocation, columnLabel): #todo: possibly add in way to select specific rows
         df = pd.read_excel(fileLocation)
         z = df.loc[:,columnLabel]
         return z
+    
+    # def pasteColumn(self,fileLocation,columnLabel, data):
+    #     pd.DataFrame.to_excel(fileLocation, columns=data, index_label = columnLabel)
 
 
 
