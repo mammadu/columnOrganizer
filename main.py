@@ -6,14 +6,18 @@ Created on Thu Feb 13 22:13:18 2020
 """
 
 from excelOrganizer import excelOrganizer
+from openpyxl import load_workbook
 
 # fileLocation = input("type in the file location")
 
 #locations of the files
-file1 = 'W:\\Documents\\Code\\excelOrganizer\\Block data.xlsx'
-file2 = 'W:\\Documents\\Code\\excelOrganizer\\Phase 3 usage.xlsx'
+# file1 = 'W:\\Documents\\Code\\excelOrganizer\\Block data.xlsx'
+# file2 = 'W:\\Documents\\Code\\excelOrganizer\\Phase 3 usage.xlsx'
 
-#instantiatign a class
+file1 = 'Block data.xlsx'
+file2 = 'Phase 3 usage.xlsx'
+
+#instantiating a class
 eo = excelOrganizer()
 
 #converting columns from excel files into dataframes.
@@ -30,5 +34,13 @@ for i in range(0,len(c1)): #this loop is to go through every cell in in the firs
         if c1[i]==c2[j]:
             n2[j] = n1[i]
 
-n2.to_excel(file2, sheet_name='Phase III with usage',columns = 'new carbon block part number')
+
+wb = load_workbook('Phase 3 usage.xlsx') #this loads the workbook
+ws = wb['Phase III with usage'] #this specifies the worksheet in the workbook
+
+for index, row in n2.iterrows():
+    cell = 'F%d'  % (index + 2) #this specifies the specific cell to edit. %d is a placeholder for a number which is given by %()
+
+
+n2.to_excel(file2, sheet_name='Phase III with usage',index_label = 'new carbon block part number')
 #copy n2 dataframe into phase 3 usage excel sheet.
